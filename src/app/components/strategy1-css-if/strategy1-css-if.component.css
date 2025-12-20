@@ -1,0 +1,26 @@
+.animation-container {
+    width: 100%;
+    height: 100px;
+}
+
+@keyframes slide {
+    0% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(200px);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.sliding-box {
+    width: 100px;
+    height: 100px;
+    background-color: var(--anim-color-indicator);
+    animation-name: slide;
+    animation-duration: var(--s1-anim-dur-long);
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: var(--s1-anim-iteration-count-infinite);
+}

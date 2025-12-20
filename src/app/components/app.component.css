@@ -1,0 +1,8 @@
+.ui-rm-container {
+    display: flex;
+    flex-direction: row;
+}
+
+button.selected {
+    outline: 2px solid blue;
+}

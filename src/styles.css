@@ -1,0 +1,25 @@
+body.s1-and-2-reduce { --ui-rm: reduce; }
+body.s1-and-2-animate { --ui-rm: animate; }
+body.s1-and-2-system { --ui-rm: system; }
+
+body {
+    font-family: Arial, sans-serif;
+
+    --anim-color-indicator: if(
+        style(--ui-rm: reduce): yellow;
+        style(--ui-rm: animate): red;
+        style(--ui-rm: system) and media(prefers-reduced-motion: reduce): green;
+        else: blue;
+    );
+
+    --s1-anim-dur-long: if(
+        style(--ui-rm: reduce) or
+            (style(--ui-rm: system) and media(prefers-reduced-motion: reduce)): 1ms;
+        else: 5s;
+    );
+    --s1-anim-iteration-count-infinite: if(
+        style(--ui-rm: reduce) or
+            (style(--ui-rm: system) and media(prefers-reduced-motion: reduce)): 1;
+        else: infinite;
+    );
+}

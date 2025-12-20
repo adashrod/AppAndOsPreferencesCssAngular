@@ -1,0 +1,32 @@
+<ul>
+    <li>
+        <a routerLink="/strategy-1">Strategy 1 (CSS if() w/ container style queries w/ custom properties)</a>
+    </li>
+    <li>
+        <a routerLink="/strategy-2">Strategy 2</a>
+    </li>
+    <li>
+        <a routerLink="/strategy-3">Strategy 3</a>
+    </li>
+</ul>
+<div class="ui-rm-container">
+    <button [class.selected]="uiPrefReducedMotion === 'animate'" (click)="setRm('animate')">Animation</button>
+    <button [class.selected]="uiPrefReducedMotion === 'reduce'" (click)="setRm('reduce')">Reduced Motion</button>
+    <button [class.selected]="uiPrefReducedMotion === 'system'" (click)="setRm('system')">System</button>
+
+</div>
+<p>
+    If the setting is "system", we'll use a media query to determine the user's preferred reduced motion setting.
+    The other two options override the system setting.
+</p>
+<p>
+    The color of the animated box indicates the current setting:
+</p>
+<ul>
+    <li><span style="color: red;">Red:</span> Animation (UI override)</li>
+    <li><span style="color: yellow; background-color: gray;">Yellow:</span> Reduced Motion (UI override)</li>
+    <li><span style="color: blue;">Blue:</span> Animation (System)</li>
+    <li><span style="color: green;">Green:</span> Reduced Motion (System)</li>
+    <li>Invisible: browser doesn't support tools used to determine the setting</li>
+</ul>
+<router-outlet />

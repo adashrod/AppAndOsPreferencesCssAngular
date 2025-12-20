@@ -1,0 +1,17 @@
+<h2>Strategy 1 (CSS if() w/ container style queries w/ custom properties)</h2>
+<p>
+    This strategy uses a container style query with a custom property and a media query to determine the user's preferred reduced motion setting.
+    It then uses a CSS if() statement to set animation properties based on the preference.
+</p>
+<p>Example:</p>
+<pre>
+--anim-duration-long: if(
+    style(--ui-rm: reduce) or
+        (style(--ui-rm: system) and media(prefers-reduced-motion: reduce)): 1ms;
+    else: 5s;
+);
+</pre>
+<p>As of the time of the latest commit, it works in Chrome; it doesn't yet work in Firefox or Kiwi (FF doesn't support container style queries w/ custom properties or if()).</p>
+<div class="animation-container">
+    <div class="sliding-box"></div>
+</div>
