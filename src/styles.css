@@ -1,6 +1,6 @@
-body.s1-and-2-reduce { --ui-rm: reduce; }
-body.s1-and-2-animate { --ui-rm: animate; }
-body.s1-and-2-system { --ui-rm: system; }
+body.s1-reduce, body.s2-reduce { --ui-rm: reduce; }
+body.s1-animate, body.s2-animate { --ui-rm: animate; }
+body.s1-system, body.s2-system { --ui-rm: system; }
 
 body {
     font-family: Arial, sans-serif;

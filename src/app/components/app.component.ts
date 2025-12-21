@@ -23,8 +23,8 @@ export class AppComponent implements OnInit {
     }
 
     public setRm(rmValue: string): void {
-        this.document.body.classList.remove("s1-and-2-animate", "s1-and-2-reduce", "s1-and-2-system");
-        this.document.body.classList.add(`s1-and-2-${rmValue}`);
+        this.document.body.classList.remove("s1-animate", "s1-reduce", "s1-system", "s2-animate", "s2-reduce", "s2-system");
+        this.document.body.classList.add(`s1-${rmValue}`, `s2-${rmValue}`);
         this.uiPrefReducedMotion = rmValue;
     }
 }
