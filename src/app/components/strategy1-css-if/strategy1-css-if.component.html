@@ -10,8 +10,12 @@
         (style(--ui-rm: system) and media(prefers-reduced-motion: reduce)): 1ms;
     else: 5s;
 );
+// todo: add a component example, too
 </pre>
 <p>As of the time of the latest commit, it works in Chrome; it doesn't yet work in Firefox or Kiwi (FF doesn't support container style queries w/ custom properties or if()).</p>
 <div class="animation-container">
     <div class="sliding-box"></div>
 </div>
+<!-- todo: add a notice if the browser doesn't support container style queries w/ custom properties -->
+<!-- todo: add a notice if the browser doesn't support if() -->
+<!-- todo: make an element with a component-specific animation override -->

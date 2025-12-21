@@ -5,7 +5,8 @@ body.s1-and-2-system { --ui-rm: system; }
 body {
     font-family: Arial, sans-serif;
 
-    --anim-color-indicator: if(
+    /* #region Strategy 1 */
+    --s1-anim-color-indicator: if(
         style(--ui-rm: reduce): yellow;
         style(--ui-rm: animate): red;
         style(--ui-rm: system) and media(prefers-reduced-motion: reduce): green;
@@ -17,9 +18,47 @@ body {
             (style(--ui-rm: system) and media(prefers-reduced-motion: reduce)): 1ms;
         else: 5s;
     );
+
     --s1-anim-iteration-count-infinite: if(
         style(--ui-rm: reduce) or
             (style(--ui-rm: system) and media(prefers-reduced-motion: reduce)): 1;
         else: infinite;
     );
+    /* #endregion */
 }
+
+/* #region Strategy 2 */
+main {
+    /* Since Strategy 2 has defaults, browsers that don't support container
+    style queries w/ custom properties will see these values no matter what. */
+    --s2-anim-color-indicator: blue;
+    --s2-anim-dur-long: 5s;
+    --s2-anim-iteration-count-infinite: infinite;
+}
+
+@container style(--ui-rm: reduce) {
+    main {
+        --s2-anim-color-indicator: yellow;
+        --s2-anim-dur-long: 1ms;
+        --s2-anim-iteration-count-infinite: 1;
+    }
+}
+
+@container style(--ui-rm: animate) {
+    main {
+        --s2-anim-color-indicator: red;
+        /* default values */
+    }
+}
+
+@container style(--ui-rm: system) {
+    @media(prefers-reduced-motion: reduce) {
+        main {
+            --s2-anim-color-indicator: green;
+            /* rules are duplicated here because of the nested media query */
+            --s2-anim-dur-long: 1ms;
+            --s2-anim-iteration-count-infinite: 1;
+        }
+    }
+}
+/* #endregion */

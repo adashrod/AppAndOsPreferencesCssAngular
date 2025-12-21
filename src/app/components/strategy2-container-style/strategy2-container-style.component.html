@@ -1,0 +1,36 @@
+<h2>Strategy 2 (container style queries only)</h2>
+<p>
+    This strategy uses a container style query with a custom property and a media query to determine the user's preferred reduced motion setting.
+</p>
+<p>Example:</p>
+<pre>
+main &#123;
+    --s2-anim-dur-long: 5s;
+    --s2-anim-iteration-count-infinite: infinite;
+&#125;
+
+&#64;container style(--ui-rm: reduce) &#123;
+    main &#123;
+        --s2-anim-dur-long: 1ms;
+        --s2-anim-iteration-count-infinite: 1;
+    &#125;
+&#125;
+
+&#64;container style(--ui-rm: system) &#123;
+    &#64;media(prefers-reduced-motion: reduce) &#123;
+        main &#123;
+            /* rules are duplicated here because of the nested media query */
+            --s2-anim-dur-long: 1ms;
+            --s2-anim-iteration-count-infinite: 1;
+        &#125;
+    &#125;
+&#125;
+
+// todo: add a component example, too
+</pre>
+<p>As of the time of the latest commit, it works in Chrome and Kiwi; it doesn't yet work in Firefox (FF doesn't support container style queries w/ custom properties).</p>
+<div class="animation-container">
+    <div class="sliding-box"></div>
+</div>
+<!-- todo: add a notice if the browser doesn't support container style queries w/ custom properties -->
+<!-- todo: make an element with a component-specific animation override -->
