@@ -1,6 +1,6 @@
-body.s1-reduce, body.s2-reduce { --ui-rm: reduce; }
-body.s1-animate, body.s2-animate { --ui-rm: animate; }
-body.s1-system, body.s2-system { --ui-rm: system; }
+body.s1-ui-reduce, body.s2-ui-reduce { --ui-rm: reduce; }
+body.s1-ui-animate, body.s2-ui-animate { --ui-rm: animate; }
+body.s1-ui-system, body.s2-ui-system { --ui-rm: system; }
 
 body {
     font-family: Arial, sans-serif;
@@ -30,7 +30,11 @@ body {
 /* #region Strategy 2 */
 main {
     /* Since Strategy 2 has defaults, browsers that don't support container
-    style queries w/ custom properties will see these values no matter what. */
+    style queries w/ custom properties will see these values no matter what.
+    These variables are scoped to <main>, not <body>, because their values are
+    dependent on container style queries of variables scoped to <body>, and
+    trying to set these on <body> didn't work.
+    */
     --s2-anim-color-indicator: blue;
     --s2-anim-dur-long: 5s;
     --s2-anim-iteration-count-infinite: infinite;
@@ -47,7 +51,7 @@ main {
 @container style(--ui-rm: animate) {
     main {
         --s2-anim-color-indicator: red;
-        /* default values */
+        /* default values: nothing to do here */
     }
 }
 
@@ -60,5 +64,35 @@ main {
             --s2-anim-iteration-count-infinite: 1;
         }
     }
+}
+/* #endregion */
+
+/* #region Strategy 3 */
+/* Since strategy 3 doesn't do any querying, it doesn't need to know the fine-grained details of how
+animate/reduce was calculated. These debug classes are only used for the color of the animated box. */
+body.s3-debug-ui-animate {
+    --s3-anim-color-indicator: red;
+}
+
+body.s3-debug-ui-reduce {
+    --s3-anim-color-indicator: yellow;
+}
+
+body.s3-debug-os-animate {
+    --s3-anim-color-indicator: blue;
+}
+
+body.s3-debug-os-reduce {
+    --s3-anim-color-indicator: green;
+}
+
+body.s3-animate {
+    --s3-anim-dur-long: 5s;
+    --s3-anim-iteration-count-infinite: infinite;
+}
+
+body.s3-reduce {
+    --s3-anim-dur-long: 1ms;
+    --s3-anim-iteration-count-infinite: 1;
 }
 /* #endregion */

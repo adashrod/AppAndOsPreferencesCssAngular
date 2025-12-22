@@ -1,0 +1,20 @@
+<h2>Strategy 3 (CSS vars and classes)</h2>
+<p>
+    This strategy uses only CSS classes to set the values of animation tokens.
+</p>
+<p>Example:</p>
+<pre>
+body.s3-animate &#123;
+    --s3-anim-dur-long: 5s;
+    --s3-anim-iteration-count-infinite: infinite;
+&#125;
+
+body.s3-reduce &#123;
+    --s3-anim-dur-long: 1ms;
+    --s3-anim-iteration-count-infinite: 1;
+&#125;
+</pre>
+<!-- todo: add a component example, too -->
+<div class="animation-container">
+    <div class="sliding-box"></div>
+</div>

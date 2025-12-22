@@ -6,13 +6,13 @@
         <a routerLink="/strategy-2">Strategy 2 (container style queries only)</a>
     </li>
     <li>
-        <a routerLink="/strategy-3">Strategy 3</a>
+        <a routerLink="/strategy-3">Strategy 3 (CSS vars and classes only)</a>
     </li>
 </ul>
 <div class="ui-rm-container">
-    <button [class.selected]="uiPrefReducedMotion === 'animate'" (click)="setRm('animate')">Animation</button>
-    <button [class.selected]="uiPrefReducedMotion === 'reduce'" (click)="setRm('reduce')">Reduced Motion</button>
-    <button [class.selected]="uiPrefReducedMotion === 'system'" (click)="setRm('system')">System</button>
+    <button [class.selected]="uiPrefReducedMotion === 'animate'" (click)="setReducedMotionPreference('animate')">Animation</button>
+    <button [class.selected]="uiPrefReducedMotion === 'reduce'" (click)="setReducedMotionPreference('reduce')">Reduced Motion</button>
+    <button [class.selected]="uiPrefReducedMotion === 'system'" (click)="setReducedMotionPreference('system')">System</button>
 
 </div>
 <p>
