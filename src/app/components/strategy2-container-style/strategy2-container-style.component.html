@@ -3,12 +3,13 @@
     This strategy uses a container style query with a custom property and a media query to determine the user's preferred reduced motion setting.
 </p>
 <p>As of the time of the latest commit, it works in Chrome and Kiwi.</p>
+<app-color-legend />
 <!-- todo: add some style to .animation-container to indicate that the it's empty because the browser doesn't support the feature -->
-<div class="animation-container">
+<app-animation-container>
     @if (supportsContainerStyleQueriesWithCustomProperties()) {
         <div class="sliding-box"></div>
     }
-</div>
+</app-animation-container>
 <app-browser-support-notice [feature]="Feature.CONTAINER_STYLE_CUSTOM_PROPERTIES" />
 <p>Example:</p>
 <pre>

@@ -1,3 +1,4 @@
+<app-welcome />
 <ul>
     <li>
         <a routerLink="/strategy-1">Strategy 1 (CSS if(...) and &#64;container style(...))</a>
@@ -9,6 +10,7 @@
         <a routerLink="/strategy-3">Strategy 3 (CSS classes and vars only)</a>
     </li>
 </ul>
+<div>The application preference is set to <code>{{uiPrefReducedMotion}}</code></div>
 <div class="ui-rm-container">
     <button [class.selected]="uiPrefReducedMotion === 'animate'" (click)="setReducedMotionPreference('animate')">Animation</button>
     <button [class.selected]="uiPrefReducedMotion === 'reduce'" (click)="setReducedMotionPreference('reduce')">Reduced Motion</button>
@@ -16,19 +18,9 @@
 
 </div>
 <p>
-    If the setting is "system", we'll use a media query to determine the user's preferred reduced motion setting.
+    If the setting is <code>system</code>, we'll use a media query to determine the user's preferred reduced motion setting.
     The other two options override the system setting.
 </p>
-<p>
-    The color of the animated box indicates the current setting:
-</p>
-<ul>
-    <li><span style="color: red;">Red:</span> Animation (UI override)</li>
-    <li><span style="color: yellow; background-color: gray;">Yellow:</span> Reduced Motion (UI override)</li>
-    <li><span style="color: blue;">Blue:</span> Animation (System)</li>
-    <li><span style="color: green;">Green:</span> Reduced Motion (System)</li>
-    <li>Invisible: browser doesn't support tools used to determine the setting</li>
-</ul>
 <main>
     <router-outlet />
 </main>

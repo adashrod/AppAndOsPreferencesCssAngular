@@ -3,12 +3,15 @@ import { DOCUMENT } from "@angular/common";
 import { Component, Inject, OnInit } from "@angular/core";
 import { RouterLink, RouterOutlet } from "@angular/router";
 
+import { WelcomeComponent } from "app/components/welcome/welcome.component";
+
 @Component({
     selector: "app-root",
     standalone: true,
     imports: [
         RouterLink,
-        RouterOutlet
+        RouterOutlet,
+        WelcomeComponent,
     ],
     templateUrl: "./app.component.html",
     styleUrl: "./app.component.css"

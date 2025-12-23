@@ -1,5 +1,2 @@
-- explain what it is
-- explain at a high level what the 3 strategies are
-- add an intro at the top of <app>
-- maybe make the welcome component an intro, and use CSS to move it to the top when it's active
 - add a pros/cons list to each strategy
+- swap 1 and 3 to show most supported first
