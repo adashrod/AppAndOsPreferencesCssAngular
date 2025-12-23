@@ -1,25 +1,25 @@
-body.s1-ui-reduce, body.s2-ui-reduce { --ui-rm: reduce; }
-body.s1-ui-animate, body.s2-ui-animate { --ui-rm: animate; }
-body.s1-ui-system, body.s2-ui-system { --ui-rm: system; }
+body.strategy1-ui-reduce, body.strategy2-ui-reduce { --ui-rm: reduce; }
+body.strategy1-ui-animate, body.strategy2-ui-animate { --ui-rm: animate; }
+body.strategy1-ui-system, body.strategy2-ui-system { --ui-rm: system; }
 
 body {
     font-family: Arial, sans-serif;
 
     /* #region Strategy 1 */
-    --s1-anim-color-indicator: if(
+    --strategy1-anim-color-indicator: if(
         style(--ui-rm: reduce): yellow;
         style(--ui-rm: animate): red;
         style(--ui-rm: system) and media(prefers-reduced-motion: reduce): green;
         else: blue;
     );
 
-    --s1-anim-dur-long: if(
+    --strategy1-anim-dur-long: if(
         style(--ui-rm: reduce) or
             (style(--ui-rm: system) and media(prefers-reduced-motion: reduce)): 1ms;
         else: 5s;
     );
 
-    --s1-anim-iteration-count-infinite: if(
+    --strategy1-anim-iteration-count-infinite: if(
         style(--ui-rm: reduce) or
             (style(--ui-rm: system) and media(prefers-reduced-motion: reduce)): 1;
         else: infinite;
@@ -30,27 +30,29 @@ body {
 /* #region Strategy 2 */
 main {
     /* Since Strategy 2 has defaults, browsers that don't support container
-    style queries w/ custom properties will see these values no matter what.
+    style queries w/ custom properties will get these values no matter what,
+    though the box is hidden in browsers that don't support strategy 2 to 
+    avoid confusion.
     These variables are scoped to <main>, not <body>, because their values are
     dependent on container style queries of variables scoped to <body>, and
     trying to set these on <body> didn't work.
     */
-    --s2-anim-color-indicator: blue;
-    --s2-anim-dur-long: 5s;
-    --s2-anim-iteration-count-infinite: infinite;
+    --strategy2-anim-color-indicator: blue;
+    --strategy2-anim-dur-long: 5s;
+    --strategy2-anim-iteration-count-infinite: infinite;
 }
 
 @container style(--ui-rm: reduce) {
     main {
-        --s2-anim-color-indicator: yellow;
-        --s2-anim-dur-long: 1ms;
-        --s2-anim-iteration-count-infinite: 1;
+        --strategy2-anim-color-indicator: yellow;
+        --strategy2-anim-dur-long: 1ms;
+        --strategy2-anim-iteration-count-infinite: 1;
     }
 }
 
 @container style(--ui-rm: animate) {
     main {
-        --s2-anim-color-indicator: red;
+        --strategy2-anim-color-indicator: red;
         /* default values: nothing to do here */
     }
 }
@@ -58,41 +60,41 @@ main {
 @container style(--ui-rm: system) {
     @media(prefers-reduced-motion: reduce) {
         main {
-            --s2-anim-color-indicator: green;
+            --strategy2-anim-color-indicator: green;
             /* rules are duplicated here because of the nested media query */
-            --s2-anim-dur-long: 1ms;
-            --s2-anim-iteration-count-infinite: 1;
+            --strategy2-anim-dur-long: 1ms;
+            --strategy2-anim-iteration-count-infinite: 1;
         }
     }
 }
 /* #endregion */
 
 /* #region Strategy 3 */
-/* Since strategy 3 doesn't do any querying, it doesn't need to know the fine-grained details of how
-animate/reduce was calculated. These debug classes are only used for the color of the animated box. */
-body.s3-debug-ui-animate {
-    --s3-anim-color-indicator: red;
+/* Since strategy 3 doesn't do any querying in CSS, it doesn't need to know the fine-grained details of
+how animate/reduce was calculated. These debug classes are only used for the color of the animated box. */
+body.strategy3-debug-ui-animate {
+    --strategy3-anim-color-indicator: red;
 }
 
-body.s3-debug-ui-reduce {
-    --s3-anim-color-indicator: yellow;
+body.strategy3-debug-ui-reduce {
+    --strategy3-anim-color-indicator: yellow;
 }
 
-body.s3-debug-os-animate {
-    --s3-anim-color-indicator: blue;
+body.strategy3-debug-os-animate {
+    --strategy3-anim-color-indicator: blue;
 }
 
-body.s3-debug-os-reduce {
-    --s3-anim-color-indicator: green;
+body.strategy3-debug-os-reduce {
+    --strategy3-anim-color-indicator: green;
 }
 
-body.s3-animate {
-    --s3-anim-dur-long: 5s;
-    --s3-anim-iteration-count-infinite: infinite;
+body.strategy3-animate {
+    --strategy3-anim-dur-long: 5s;
+    --strategy3-anim-iteration-count-infinite: infinite;
 }
 
-body.s3-reduce {
-    --s3-anim-dur-long: 1ms;
-    --s3-anim-iteration-count-infinite: 1;
+body.strategy3-reduce {
+    --strategy3-anim-dur-long: 1ms;
+    --strategy3-anim-iteration-count-infinite: 1;
 }
 /* #endregion */

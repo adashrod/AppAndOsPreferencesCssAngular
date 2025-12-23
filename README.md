@@ -1,5 +1,5 @@
 - explain what it is
 - explain at a high level what the 3 strategies are
 - add an intro at the top of <app>
-- move the sliding box higher
-- get rid of/rename s[123] in examples
+- maybe make the welcome component an intro, and use CSS to move it to the top when it's active
+- add a pros/cons list to each strategy

@@ -1,11 +1,14 @@
 import { Component } from "@angular/core";
 
+import { BrowserSupportNoticeComponent, Feature } from "app/components/browser-support-notice/browser-support-notice.component";
+
 @Component({
     selector: "app-strategy1-css-if",
     standalone: true,
-    imports: [],
+    imports: [BrowserSupportNoticeComponent],
     templateUrl: "./strategy1-css-if.component.html",
     styleUrl: "./strategy1-css-if.component.css"
 })
-// eslint-disable-next-line @typescript-eslint/no-extraneous-class
-export class Strategy1CssIfComponent {}
+export class Strategy1CssIfComponent {
+    public readonly Feature = Feature;
+}

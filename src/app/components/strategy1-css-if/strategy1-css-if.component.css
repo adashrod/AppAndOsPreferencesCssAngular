@@ -18,9 +18,9 @@
 .sliding-box {
     width: 100px;
     height: 100px;
-    background-color: var(--s1-anim-color-indicator);
+    background-color: var(--strategy1-anim-color-indicator);
     animation-name: slide;
-    animation-duration: var(--s1-anim-dur-long);
+    animation-duration: var(--strategy1-anim-dur-long);
     animation-timing-function: ease-in-out;
-    animation-iteration-count: var(--s1-anim-iteration-count-infinite);
+    animation-iteration-count: var(--strategy1-anim-iteration-count-infinite);
 }

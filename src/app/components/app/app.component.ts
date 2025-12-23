@@ -28,27 +28,27 @@ export class AppComponent implements OnInit {
 
     public setReducedMotionPreference(reducedMotionPreference: string): void {
         this.uiPrefReducedMotion = reducedMotionPreference;
-        this.document.body.classList.remove("s1-ui-animate", "s1-ui-reduce", "s1-ui-system", "s2-ui-animate", "s2-ui-reduce", "s2-ui-system");
-        this.document.body.classList.add(`s1-ui-${reducedMotionPreference}`, `s2-ui-${reducedMotionPreference}`);
+        this.document.body.classList.remove("strategy1-ui-animate", "strategy1-ui-reduce", "strategy1-ui-system", "strategy2-ui-animate", "strategy2-ui-reduce", "strategy2-ui-system");
+        this.document.body.classList.add(`strategy1-ui-${reducedMotionPreference}`, `strategy2-ui-${reducedMotionPreference}`);
         const mediaQueryMatches = this.getOsReducedMotion();
         this.updateStrategy3ClassNames(mediaQueryMatches);
     }
 
     private updateStrategy3ClassNames(mediaQueryMatches: boolean | null): void {
         const strategy3ClassNames = this.calculateStrategy3ClassNames(mediaQueryMatches);
-        this.document.body.classList.remove("s3-animate", "s3-reduce", "s3-debug-os-reduce", "s3-debug-os-animate", "s3-debug-ui-animate", "s3-debug-ui-reduce");
+        this.document.body.classList.remove("strategy3-animate", "strategy3-reduce", "strategy3-debug-os-reduce", "strategy3-debug-os-animate", "strategy3-debug-ui-animate", "strategy3-debug-ui-reduce");
         this.document.body.classList.add(...strategy3ClassNames);
     }
 
     private calculateStrategy3ClassNames(mediaQueryMatches: boolean | null): string[] {
         const result = this.calculateStrategy3DebugClassNames();
         if (this.uiPrefReducedMotion === "animate") {
-            result.push("s3-animate");
+            result.push("strategy3-animate");
         } else if (this.uiPrefReducedMotion === "reduce") {
-            result.push("s3-reduce");
+            result.push("strategy3-reduce");
         } else { // system
             if (mediaQueryMatches !== null) {
-                result.push(mediaQueryMatches ? "s3-reduce" : "s3-animate");
+                result.push(mediaQueryMatches ? "strategy3-reduce" : "strategy3-animate");
             }
         }
         return result;
@@ -61,15 +61,15 @@ export class AppComponent implements OnInit {
         const result: string[] = [];
         switch (this.uiPrefReducedMotion) {
             case "animate":
-                result.push("s3-debug-ui-animate");
+                result.push("strategy3-debug-ui-animate");
                 break;
             case "reduce":
-                result.push("s3-debug-ui-reduce");
+                result.push("strategy3-debug-ui-reduce");
                 break;
             case "system": {
                 const prefersReducedMotion = this.getOsReducedMotion();
                 if (prefersReducedMotion !== null) {
-                    result.push(prefersReducedMotion ? "s3-debug-os-reduce" : "s3-debug-os-animate");
+                    result.push(prefersReducedMotion ? "strategy3-debug-os-reduce" : "strategy3-debug-os-animate");
                 }
                 break;
             }
