@@ -3,6 +3,10 @@
     This strategy uses a container style query with a custom property and a media query to determine the user's preferred reduced motion setting.
     It then uses a CSS if() statement to set animation properties based on the preference.
 </p>
+<p>As of the time of the latest commit, it works in Chrome; it doesn't yet work in Firefox or Kiwi (FF doesn't support container style queries w/ custom properties or if()).</p>
+<div class="animation-container">
+    <div class="sliding-box"></div>
+</div>
 <p>Example:</p>
 <pre>
 --anim-duration-long: if(
@@ -10,12 +14,13 @@
         (style(--ui-rm: system) and media(prefers-reduced-motion: reduce)): 1ms;
     else: 5s;
 );
-// todo: add a component example, too
+--anim-iteration-count-infinite: if(
+    style(--ui-rm: reduce) or
+        (style(--ui-rm: system) and media(prefers-reduced-motion: reduce)): 1;
+    else: infinite;
+);
+<!-- todo: add a component example, too -->
 </pre>
-<p>As of the time of the latest commit, it works in Chrome; it doesn't yet work in Firefox or Kiwi (FF doesn't support container style queries w/ custom properties or if()).</p>
-<div class="animation-container">
-    <div class="sliding-box"></div>
-</div>
 <!-- todo: add a notice if the browser doesn't support container style queries w/ custom properties -->
 <!-- todo: add a notice if the browser doesn't support if() -->
 <!-- todo: make an element with a component-specific animation override -->
