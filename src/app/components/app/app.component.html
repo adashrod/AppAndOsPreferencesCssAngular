@@ -1,17 +1,17 @@
 <app-welcome />
 <ul>
     <li>
-        <a routerLink="/strategy-1">Strategy 1 (CSS if(...) and &#64;container style(...))</a>
+        <a routerLink="/strategy-1">Strategy 1 (CSS classes and vars only)</a>
     </li>
     <li>
         <a routerLink="/strategy-2">Strategy 2 (&#64;container style(...) only)</a>
     </li>
     <li>
-        <a routerLink="/strategy-3">Strategy 3 (CSS classes and vars only)</a>
+        <a routerLink="/strategy-3">Strategy 3 (CSS if(...) and &#64;container style(...))</a>
     </li>
 </ul>
 <div>The application preference is set to <code>{{uiPrefReducedMotion}}</code></div>
-<div class="ui-rm-container">
+<div class="app-preference-container">
     <button [class.selected]="uiPrefReducedMotion === 'animate'" (click)="setReducedMotionPreference('animate')">Animation</button>
     <button [class.selected]="uiPrefReducedMotion === 'reduce'" (click)="setReducedMotionPreference('reduce')">Reduced Motion</button>
     <button [class.selected]="uiPrefReducedMotion === 'system'" (click)="setReducedMotionPreference('system')">System</button>

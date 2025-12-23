@@ -1,31 +1,40 @@
-body.strategy1-ui-reduce, body.strategy2-ui-reduce { --ui-rm: reduce; }
-body.strategy1-ui-animate, body.strategy2-ui-animate { --ui-rm: animate; }
-body.strategy1-ui-system, body.strategy2-ui-system { --ui-rm: system; }
-
 body {
     font-family: Arial, sans-serif;
-
-    /* #region Strategy 1 */
-    --strategy1-anim-color-indicator: if(
-        style(--ui-rm: reduce): yellow;
-        style(--ui-rm: animate): red;
-        style(--ui-rm: system) and media(prefers-reduced-motion: reduce): green;
-        else: blue;
-    );
-
-    --strategy1-anim-dur-long: if(
-        style(--ui-rm: reduce) or
-            (style(--ui-rm: system) and media(prefers-reduced-motion: reduce)): 1ms;
-        else: 5s;
-    );
-
-    --strategy1-anim-iteration-count-infinite: if(
-        style(--ui-rm: reduce) or
-            (style(--ui-rm: system) and media(prefers-reduced-motion: reduce)): 1;
-        else: infinite;
-    );
-    /* #endregion */
 }
+
+body.strategy1-ui-reduce, body.strategy2-ui-reduce { --app-preference: reduce; }
+body.strategy1-ui-animate, body.strategy2-ui-animate { --app-preference: animate; }
+body.strategy1-ui-system, body.strategy2-ui-system { --app-preference: system; }
+
+/* #region Strategy 1 */
+/* Since strategy 1 doesn't do any querying in CSS, it doesn't need to know the fine-grained details of
+how animate/reduce was calculated. These debug classes are only used for the color of the animated box. */
+body.strategy1-debug-ui-animate {
+    --strategy1-anim-color-indicator: red;
+}
+
+body.strategy1-debug-ui-reduce {
+    --strategy1-anim-color-indicator: yellow;
+}
+
+body.strategy1-debug-os-animate {
+    --strategy1-anim-color-indicator: blue;
+}
+
+body.strategy1-debug-os-reduce {
+    --strategy1-anim-color-indicator: green;
+}
+
+body.strategy1-animate {
+    --strategy1-anim-dur-long: 5s;
+    --strategy1-anim-iteration-count-infinite: infinite;
+}
+
+body.strategy1-reduce {
+    --strategy1-anim-dur-long: 1ms;
+    --strategy1-anim-iteration-count-infinite: 1;
+}
+/* #endregion */
 
 /* #region Strategy 2 */
 main {
@@ -42,7 +51,7 @@ main {
     --strategy2-anim-iteration-count-infinite: infinite;
 }
 
-@container style(--ui-rm: reduce) {
+@container style(--app-preference: reduce) {
     main {
         --strategy2-anim-color-indicator: yellow;
         --strategy2-anim-dur-long: 1ms;
@@ -50,14 +59,14 @@ main {
     }
 }
 
-@container style(--ui-rm: animate) {
+@container style(--app-preference: animate) {
     main {
         --strategy2-anim-color-indicator: red;
         /* default values: nothing to do here */
     }
 }
 
-@container style(--ui-rm: system) {
+@container style(--app-preference: system) {
     @media(prefers-reduced-motion: reduce) {
         main {
             --strategy2-anim-color-indicator: green;
@@ -70,31 +79,24 @@ main {
 /* #endregion */
 
 /* #region Strategy 3 */
-/* Since strategy 3 doesn't do any querying in CSS, it doesn't need to know the fine-grained details of
-how animate/reduce was calculated. These debug classes are only used for the color of the animated box. */
-body.strategy3-debug-ui-animate {
-    --strategy3-anim-color-indicator: red;
-}
+body {
+    --strategy3-anim-color-indicator: if(
+        style(--app-preference: reduce): yellow;
+        style(--app-preference: animate): red;
+        style(--app-preference: system) and media(prefers-reduced-motion: reduce): green;
+        else: blue;
+    );
 
-body.strategy3-debug-ui-reduce {
-    --strategy3-anim-color-indicator: yellow;
-}
+    --strategy3-anim-dur-long: if(
+        style(--app-preference: reduce) or
+            (style(--app-preference: system) and media(prefers-reduced-motion: reduce)): 1ms;
+        else: 5s;
+    );
 
-body.strategy3-debug-os-animate {
-    --strategy3-anim-color-indicator: blue;
-}
-
-body.strategy3-debug-os-reduce {
-    --strategy3-anim-color-indicator: green;
-}
-
-body.strategy3-animate {
-    --strategy3-anim-dur-long: 5s;
-    --strategy3-anim-iteration-count-infinite: infinite;
-}
-
-body.strategy3-reduce {
-    --strategy3-anim-dur-long: 1ms;
-    --strategy3-anim-iteration-count-infinite: 1;
+    --strategy3-anim-iteration-count-infinite: if(
+        style(--app-preference: reduce) or
+            (style(--app-preference: system) and media(prefers-reduced-motion: reduce)): 1;
+        else: infinite;
+    );
 }
 /* #endregion */

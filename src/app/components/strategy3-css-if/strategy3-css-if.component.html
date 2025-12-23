@@ -1,4 +1,4 @@
-<h2>Strategy 1 (CSS if() w/ container style queries w/ custom properties)</h2>
+<h2>Strategy 3 (CSS if() w/ container style queries w/ custom properties)</h2>
 <p>
     This strategy uses a container style query with a custom property and a media query to determine the user's preferred reduced motion setting.
     It then uses a CSS if() statement to set animation properties based on the preference.
@@ -13,13 +13,13 @@
 <p>Example:</p>
 <pre>
 --anim-duration-long: if(
-    style(--ui-rm: reduce) or
-        (style(--ui-rm: system) and media(prefers-reduced-motion: reduce)): 1ms;
+    style(--app-preference: reduce) or
+        (style(--app-preference: system) and media(prefers-reduced-motion: reduce)): 1ms;
     else: 5s;
 );
 --anim-iteration-count-infinite: if(
-    style(--ui-rm: reduce) or
-        (style(--ui-rm: system) and media(prefers-reduced-motion: reduce)): 1;
+    style(--app-preference: reduce) or
+        (style(--app-preference: system) and media(prefers-reduced-motion: reduce)): 1;
     else: infinite;
 );
 <!-- todo: add a component example, too -->

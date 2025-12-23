@@ -1,2 +1,1 @@
 - add a pros/cons list to each strategy
-- swap 1 and 3 to show most supported first

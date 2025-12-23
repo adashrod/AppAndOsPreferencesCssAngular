@@ -5,16 +5,16 @@ import { BrowserSupportNoticeComponent, Feature } from "app/components/browser-s
 import { ColorLegendComponent } from "app/components/color-legend/color-legend.component";
 
 @Component({
-    selector: "app-strategy1-css-if",
+    selector: "app-strategy3-css-if",
     standalone: true,
     imports: [
         AnimationContainerComponent,
         BrowserSupportNoticeComponent,
         ColorLegendComponent
     ],    
-    templateUrl: "./strategy1-css-if.component.html",
-    styleUrl: "./strategy1-css-if.component.css"
+    templateUrl: "./strategy3-css-if.component.html",
+    styleUrl: "./strategy3-css-if.component.css"
 })
-export class Strategy1CssIfComponent {
+export class Strategy3CssIfComponent {
     public readonly Feature = Feature;
 }

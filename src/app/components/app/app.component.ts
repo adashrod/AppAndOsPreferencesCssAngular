@@ -25,33 +25,42 @@ export class AppComponent implements OnInit {
         this.setReducedMotionPreference("system");
         const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
         mediaQuery.addEventListener("change", (event: MediaQueryListEvent) => {
-            this.updateStrategy3ClassNames(event.matches);
+            this.updateStrategy1ClassNames(event.matches);
+            // no need to update anything for strategies 2 and 3 here because they check the media query in CSS
         });
     }
 
     public setReducedMotionPreference(reducedMotionPreference: string): void {
         this.uiPrefReducedMotion = reducedMotionPreference;
-        this.document.body.classList.remove("strategy1-ui-animate", "strategy1-ui-reduce", "strategy1-ui-system", "strategy2-ui-animate", "strategy2-ui-reduce", "strategy2-ui-system");
-        this.document.body.classList.add(`strategy1-ui-${reducedMotionPreference}`, `strategy2-ui-${reducedMotionPreference}`);
         const mediaQueryMatches = this.getOsReducedMotion();
-        this.updateStrategy3ClassNames(mediaQueryMatches);
+        this.updateStrategy1ClassNames(mediaQueryMatches);
+        // Strategies 2 and 3 check the media query in CSS
+        this.updateStrategy2ClassNames();
+        this.updateStrategy3ClassNames();
     }
 
-    private updateStrategy3ClassNames(mediaQueryMatches: boolean | null): void {
-        const strategy3ClassNames = this.calculateStrategy3ClassNames(mediaQueryMatches);
-        this.document.body.classList.remove("strategy3-animate", "strategy3-reduce", "strategy3-debug-os-reduce", "strategy3-debug-os-animate", "strategy3-debug-ui-animate", "strategy3-debug-ui-reduce");
-        this.document.body.classList.add(...strategy3ClassNames);
+    private updateStrategy1ClassNames(mediaQueryMatches: boolean | null): void {
+        this.document.body.classList.remove(
+            "strategy1-animate",
+            "strategy1-reduce",
+            "strategy1-debug-os-reduce",
+            "strategy1-debug-os-animate",
+            "strategy1-debug-ui-animate",
+            "strategy1-debug-ui-reduce"
+        );
+        const strategy1ClassNames = this.calculateStrategy1ClassNames(mediaQueryMatches);
+        this.document.body.classList.add(...strategy1ClassNames);
     }
 
-    private calculateStrategy3ClassNames(mediaQueryMatches: boolean | null): string[] {
-        const result = this.calculateStrategy3DebugClassNames();
+    private calculateStrategy1ClassNames(mediaQueryMatches: boolean | null): string[] {
+        const result = this.calculateStrategy1DebugClassNames();
         if (this.uiPrefReducedMotion === "animate") {
-            result.push("strategy3-animate");
+            result.push("strategy1-animate");
         } else if (this.uiPrefReducedMotion === "reduce") {
-            result.push("strategy3-reduce");
+            result.push("strategy1-reduce");
         } else { // system
             if (mediaQueryMatches !== null) {
-                result.push(mediaQueryMatches ? "strategy3-reduce" : "strategy3-animate");
+                result.push(mediaQueryMatches ? "strategy1-reduce" : "strategy1-animate");
             }
         }
         return result;
@@ -60,19 +69,19 @@ export class AppComponent implements OnInit {
     /**
      * @returns a CSS class used only for debugging (the box color), based on both the OS and UI settings
      */
-    private calculateStrategy3DebugClassNames(): string[] {
+    private calculateStrategy1DebugClassNames(): string[] {
         const result: string[] = [];
         switch (this.uiPrefReducedMotion) {
             case "animate":
-                result.push("strategy3-debug-ui-animate");
+                result.push("strategy1-debug-ui-animate");
                 break;
             case "reduce":
-                result.push("strategy3-debug-ui-reduce");
+                result.push("strategy1-debug-ui-reduce");
                 break;
             case "system": {
                 const prefersReducedMotion = this.getOsReducedMotion();
                 if (prefersReducedMotion !== null) {
-                    result.push(prefersReducedMotion ? "strategy3-debug-os-reduce" : "strategy3-debug-os-animate");
+                    result.push(prefersReducedMotion ? "strategy1-debug-os-reduce" : "strategy1-debug-os-animate");
                 }
                 break;
             }
@@ -80,6 +89,24 @@ export class AppComponent implements OnInit {
                 throw new Error(`Invalid UI reduced motion value: ${this.uiPrefReducedMotion}`);
         }
         return result;
+    }
+
+    private updateStrategy2ClassNames(): void {
+        this.document.body.classList.remove(
+            "strategy2-ui-animate",
+            "strategy2-ui-reduce",
+            "strategy2-ui-system",
+        );
+        this.document.body.classList.add(`strategy2-ui-${this.uiPrefReducedMotion}`);
+    }
+
+    private updateStrategy3ClassNames(): void {
+        this.document.body.classList.remove(
+            "strategy3-ui-animate",
+            "strategy3-ui-reduce",
+            "strategy3-ui-system",
+        );
+        this.document.body.classList.add(`strategy3-ui-${this.uiPrefReducedMotion}`);
     }
 
     /**

@@ -18,14 +18,14 @@ main &#123;
     --anim-iteration-count-infinite: infinite;
 &#125;
 
-&#64;container style(--ui-rm: reduce) &#123;
+&#64;container style(--app-preference: reduce) &#123;
     main &#123;
         --anim-duration-long: 1ms;
         --anim-iteration-count-infinite: 1;
     &#125;
 &#125;
 
-&#64;container style(--ui-rm: system) &#123;
+&#64;container style(--app-preference: system) &#123;
     &#64;media(prefers-reduced-motion: reduce) &#123;
         main &#123;
             /* rules are duplicated here because of the nested media query */
