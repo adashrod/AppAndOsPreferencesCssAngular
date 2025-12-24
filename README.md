@@ -1,2 +1,1 @@
 - add more to the pros/cons lists after implementing component-specific overrides
-- put color legend and anim container in the same row (maybe not for portrait)

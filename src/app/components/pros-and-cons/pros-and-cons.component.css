@@ -6,3 +6,9 @@
     padding: 1rem;
     border-radius: 0.5rem;
 }
+
+@media (orientation: portrait) {
+    .pros-and-cons {
+        flex-direction: column;
+    }
+}

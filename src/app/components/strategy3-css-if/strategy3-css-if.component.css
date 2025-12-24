@@ -1,6 +1,13 @@
-.animation-container {
-    width: 100%;
-    height: 100px;
+.demo-container {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+@media (orientation: portrait) {
+    .demo-container {
+        flex-direction: column;
+    }
 }
 
 @keyframes slide {
