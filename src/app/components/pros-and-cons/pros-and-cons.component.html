@@ -1,0 +1,18 @@
+<div class="pros-and-cons">
+    <div class="column">
+        <h3>Pros</h3>
+        <ul>
+            @for (pro of pros; track pro) {
+                <li>{{ pro }}</li>
+            }
+        </ul>
+    </div>
+    <div class="column">
+        <h3>Cons</h3>
+        <ul>
+            @for (con of cons; track con) {
+                <li>{{ con }}</li>
+            }
+        </ul>
+    </div>
+</div>

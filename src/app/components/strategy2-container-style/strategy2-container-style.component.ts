@@ -3,6 +3,7 @@ import { Component } from "@angular/core";
 import { AnimationContainerComponent } from "app/components/animation-container/animation-container.component";
 import { BrowserSupportNoticeComponent, Feature } from "app/components/browser-support-notice/browser-support-notice.component";
 import { ColorLegendComponent } from "app/components/color-legend/color-legend.component";
+import { ProsAndConsComponent } from "app/components/pros-and-cons/pros-and-cons.component";
 import { supportsContainerStyleQueriesWithCustomProperties } from "app/util/css";
 
 @Component({
@@ -12,6 +13,7 @@ import { supportsContainerStyleQueriesWithCustomProperties } from "app/util/css"
         AnimationContainerComponent,
         BrowserSupportNoticeComponent,
         ColorLegendComponent,
+        ProsAndConsComponent,
     ],
     templateUrl: "./strategy2-container-style.component.html",
     styleUrl: "./strategy2-container-style.component.css"
@@ -19,4 +21,12 @@ import { supportsContainerStyleQueriesWithCustomProperties } from "app/util/css"
 export class Strategy2ContainerStyleComponent {
     public readonly Feature = Feature;
     public readonly supportsContainerStyleQueriesWithCustomProperties = supportsContainerStyleQueriesWithCustomProperties;
+    public pros: string[] = [
+        
+    ];
+    public cons: string[] = [
+        "Not supported in all browsers yet",
+        "Feature is still experimental and could change in the future",
+        "Rules are duplicated because of media query nested in a container style query",
+    ];
 }

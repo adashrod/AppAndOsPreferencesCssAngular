@@ -12,16 +12,19 @@
 <app-browser-support-notice [feature]="Feature.CSS_IF" />
 <p>Example:</p>
 <pre>
---anim-duration-long: if(
-    style(--app-preference: reduce) or
-        (style(--app-preference: system) and media(prefers-reduced-motion: reduce)): 1ms;
-    else: 5s;
-);
---anim-iteration-count-infinite: if(
-    style(--app-preference: reduce) or
-        (style(--app-preference: system) and media(prefers-reduced-motion: reduce)): 1;
-    else: infinite;
-);
+body &#123;
+    --anim-duration-long: if(
+        style(--app-preference: reduce) or
+            (style(--app-preference: system) and media(prefers-reduced-motion: reduce)): 1ms;
+        else: 5s;
+    );
+    --anim-iteration-count-infinite: if(
+        style(--app-preference: reduce) or
+            (style(--app-preference: system) and media(prefers-reduced-motion: reduce)): 1;
+        else: infinite;
+    );
+&#125;
 <!-- todo: add a component example, too -->
 </pre>
 <!-- todo: make an element with a component-specific animation override -->
+<app-pros-and-cons [pros]="pros" [cons]="cons" />
