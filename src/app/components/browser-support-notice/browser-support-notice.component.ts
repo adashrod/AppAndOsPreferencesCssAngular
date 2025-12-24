@@ -17,8 +17,23 @@ interface FeatureConfig {
     selector: "app-browser-support-notice",
     standalone: true,
     imports: [],
-    templateUrl: "./browser-support-notice.component.html",
-    styleUrl: "./browser-support-notice.component.css"
+    template: `
+        @if (show) {
+            <div class="notice">
+                Your browser does not support <a [href]="featureConfig.featureDocUrl" target="_blank">{{ featureConfig.featureName }}</a>.
+            </div>
+        }
+    `,
+    styles: `
+        .notice {
+            background-color: #ffe0e0;
+            color: red;
+            border: 2px solid red;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+        }
+    `
 })
 export class BrowserSupportNoticeComponent {
     @Input({ required: true }) public feature!: Feature;
