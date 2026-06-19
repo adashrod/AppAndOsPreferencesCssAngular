@@ -33,7 +33,7 @@ function setReducedMotionPreference(reducedMotionPreference: string): void {
         "reduce",
         "system",
     );
-    document.body.classList.add(reducedMotionPreferencepreference);
+    document.body.classList.add(reducedMotionPreference);
 }`;
 
     public cssWiring = `/* use the global class to create the custom property */

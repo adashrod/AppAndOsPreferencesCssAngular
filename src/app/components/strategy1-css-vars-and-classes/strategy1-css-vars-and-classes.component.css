@@ -22,18 +22,6 @@
     }
 }
 
-@keyframes flash {
-    0% {
-        opacity: 100%;
-    }
-    50% {
-        opacity: 0%;
-    }
-    100% {
-        opacity: 100%;
-    }
-}
-
 .sliding-box {
     width: 100px;
     height: 100px;
@@ -42,18 +30,4 @@
     animation-duration: var(--strategy1-anim-dur-long);
     animation-timing-function: ease-in-out;
     animation-iteration-count: var(--strategy1-anim-iteration-count-infinite);
-}
-
-.component-specific-example {
-    animation-name: flash;
-}
-
-::ng-deep body.strategy1-animate .component-specific-example {
-    animation-duration: 1s;
-    animation-iteration-count: infinite;
-}
-
-::ng-deep body.strategy1-reduce .component-specific-example {
-    animation-duration: 5s;
-    animation-iteration-count: 5;
 }

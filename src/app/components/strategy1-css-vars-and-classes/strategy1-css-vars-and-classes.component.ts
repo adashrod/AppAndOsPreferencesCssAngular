@@ -38,7 +38,7 @@ mediaQuery.addEventListener("change", (event: MediaQueryListEvent) => {
 function updateClassName(mediaQueryMatches: boolean | null): void {
     document.body.classList.remove("animate", "reduce");
     const className = calculateClassName(mediaQueryMatches);
-    document.body.classList.add(classNames);
+    document.body.classList.add(className);
 }
 
 function calculateClassName(mediaQueryMatches: boolean | null): string[] {
