@@ -1,7 +1,7 @@
 /* global window */
 import { DOCUMENT } from "@angular/common";
 import { Component, Inject, OnInit } from "@angular/core";
-import { RouterLink, RouterOutlet } from "@angular/router";
+import { Router, RouterLink, RouterOutlet } from "@angular/router";
 
 import { WelcomeComponent } from "app/components/welcome/welcome.component";
 
@@ -19,9 +19,19 @@ import { WelcomeComponent } from "app/components/welcome/welcome.component";
 export class AppComponent implements OnInit {
     public uiPrefReducedMotion!: string;
 
-    public constructor(@Inject(DOCUMENT) private document: Document) {}
+    public constructor(
+        @Inject(DOCUMENT) private document: Document,
+        private router: Router
+    ) {}
 
     public ngOnInit(): void {
+        // Handle redirect from 404.html on GitHub Pages
+        const redirect = sessionStorage.getItem('redirect');
+        if (redirect) {
+            sessionStorage.removeItem('redirect');
+            this.router.navigateByUrl(redirect);
+        }
+
         this.setReducedMotionPreference("system");
         const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
         mediaQuery.addEventListener("change", (event: MediaQueryListEvent) => {
