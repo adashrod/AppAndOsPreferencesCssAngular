@@ -34,7 +34,6 @@ export class AppComponent implements OnInit {
             void this.router.navigateByUrl(redirect);
         }
 
-        this.setReducedMotionPreference("system");
         if (isPlatformBrowser(this.platformId)) {
             this.mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
             this.mediaQuery.addEventListener("change", (event: MediaQueryListEvent) => {
@@ -42,6 +41,8 @@ export class AppComponent implements OnInit {
                 // no need to update anything for strategies 2 and 3 here because they check the media query in CSS
             });
         }
+
+        this.setReducedMotionPreference("system");
     }
 
     public setReducedMotionPreference(reducedMotionPreference: string): void {
