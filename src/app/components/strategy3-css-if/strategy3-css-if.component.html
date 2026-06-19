@@ -15,61 +15,15 @@
         <div class="sliding-box"></div>
     </app-animation-container>
 </div>
+
 <p>JavaScript Wiring:</p>
-<pre>
-// fired when user selects preference in application UI
-function setReducedMotionPreference(reducedMotionPreference: string): void &#123;
-    // whether "system" effectively means "animate" or "reduce" is determined in CSS, not in code
-    document.body.classList.remove(
-        "animate",
-        "reduce",
-        "system",
-    );
-    document.body.classList.add(reducedMotionPreferencepreference);
-&#125;
-</pre>
+<pre><code [highlight]="jsWiring" language="typescript"></code></pre>
+
 <p>CSS Wiring:</p>
-<pre>
-/* use the global class to create the custom property */
-body.reduce &#123; --app-preference: reduce; &#125;
-body.animate &#123; --app-preference: animate; &#125;
-body.system &#123; --app-preference: system; &#125;
+<pre><code [highlight]="cssWiring" language="css"></code></pre>
+<pre><code [highlight]="cssFuture" language="css" [ignoreIllegals]="true"></code></pre>
 
-body &#123;
-    /* Define token values using conditional logic */
-    --anim-duration-long: if(
-        style(--app-preference: reduce) or
-            (style(--app-preference: system) and media(prefers-reduced-motion: reduce)): 1ms;
-        else: 5s;
-    );
-    /* Define token values using conditional logic */
-    --anim-iteration-count-infinite: if(
-        style(--app-preference: reduce) or
-            (style(--app-preference: system) and media(prefers-reduced-motion: reduce)): 1;
-        else: infinite;
-    );
-&#125;
-</pre>
-<pre>
-/* THE FOLLOWING IS NOT POSSIBLE, but could be once &#64;custom-media is widely supported, if custom media supports style queries.
- * If supported, this would make strategy 3 using CSS if() very concise. Fingers crossed 🤞 that this will be possible someday.
- */
-&#64;custom-media --custom-reduced style(--app-preference: reduce) or
-    (style(--app-preference: system) and (prefers-reduced-motion: reduce));
-
-body &#123;
-    --anim-duration-long: if(--custom-reduced): 5s; else: 1s;);
-    --anim-iteration-count: if(--custom-reduced): 2; else: infinite;);
-&#125;
-</pre>
 <p>Example CSS:</p>
-<pre>
-.animated-component &#123;
-    animation-name: slider;
-    /* Use tokens and get whatever values they currently have; components 
-     * don't need to know about settings that determine behavior */
-    animation-duration: --anim-duration-long;
-    animation-iteration-count: --anim-iteration-count-infinite;
-&#125;
-</pre>
+<pre><code [highlight]="cssUsage" language="css"></code></pre>
+
 <app-pros-and-cons [pros]="pros" [cons]="cons" />

@@ -11,81 +11,14 @@
         <div class="sliding-box"></div>
     </app-animation-container>
 </div>
+
 <p>JavaScript Wiring:</p>
-<pre>
-let uiPrefReducedMotion;
-
-// fired when user selects preference in application UI
-function setReducedMotionPreference(reducedMotionPreference: string): void &#123;
-    uiPrefReducedMotion = reducedMotionPreference;
-    const mediaQueryMatches = getOsReducedMotion();
-    updateClassName(mediaQueryMatches);
-&#125;
-
-const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-
-// media query listener updates the CSS class whenever the system preference changes
-mediaQuery.addEventListener("change", (event: MediaQueryListEvent) => &#123;
-    updateClassName(event.matches);
-&#125;);
-
-function updateClassName(mediaQueryMatches: boolean | null): void &#123;
-    document.body.classList.remove("animate", "reduce");
-    const className = calculateClassName(mediaQueryMatches);
-    document.body.classList.add(classNames);
-&#125;
-
-function calculateClassName(mediaQueryMatches: boolean | null): string[] &#123;
-    // Application preference implemented in the app UI takes precedence
-    if (uiPrefReducedMotion === "animate") &#123;
-        return "animate";
-    &#125; else if (uiPrefReducedMotion === "reduce") &#123;
-        return "reduce";
-    &#125; else &#123; // system
-
-        // if user chooses "system" in the app UI, defer to the media query, here in code
-        if (mediaQueryMatches !== null) &#123;
-            return mediaQueryMatches ? "reduce" : "animate";
-        &#125;
-    &#125;
-    return "animate";
-&#125;
-
-function getOsReducedMotion(): boolean | null &#123;
-    if (typeof window !== "undefined") &#123;
-        return mediaQuery.matches;
-    &#125;
-    return null;
-&#125;
-</pre>
-
+<pre><code [highlightAuto]="jsWiring"></code></pre>
 
 <p>CSS Wiring:</p>
-<pre>
-/* "animate" and "reduce" classes are added to &lt;body&gt; by JS.
- * There is no "system" class because that setting is only used in code to determine whether to use "animate" or "reduce".
- */
+<pre><code [highlightAuto]="cssWiring"></code></pre>
 
-body.animate &#123;
-    /* Define token values */
-    --anim-duration-long: 5s;
-    --anim-iteration-count-infinite: infinite;
-&#125;
-
-body.reduce &#123;
-    /* Define token values */
-    --anim-duration-long: 1ms;
-    --anim-iteration-count-infinite: 1;
-&#125;
-</pre>
 <p>CSS Usage:</p>
-<pre>
-.animated-component &#123;
-    animation-name: slider;
-    /* Use tokens and get whatever values they currently have; components 
-     * don't need to know about settings that determine behavior */
-    animation-duration: --anim-duration-long;
-    animation-iteration-count: --anim-iteration-count-infinite;
-&#125;
-</pre>
+<pre><code [highlightAuto]="cssUsage"></code></pre>
+
 <app-pros-and-cons [pros]="pros" [cons]="cons" />

@@ -1,5 +1,7 @@
 import { Component } from "@angular/core";
 
+import { Highlight } from "ngx-highlightjs";
+
 import { AnimationContainerComponent } from "app/components/animation-container/animation-container.component";
 import { BrowserSupportNoticeComponent, Feature } from "app/components/browser-support-notice/browser-support-notice.component";
 import { ColorLegendComponent } from "app/components/color-legend/color-legend.component";
@@ -13,6 +15,7 @@ import { supportsCssIf } from "app/util/css";
         AnimationContainerComponent,
         BrowserSupportNoticeComponent,
         ColorLegendComponent,
+        Highlight,
         ProsAndConsComponent,
     ],
     templateUrl: "./strategy3-css-if.component.html",
@@ -21,6 +24,56 @@ import { supportsCssIf } from "app/util/css";
 export class Strategy3CssIfComponent {
     public readonly Feature = Feature;
     public readonly supportsCssIf = supportsCssIf;
+
+    public jsWiring = `// fired when user selects preference in application UI
+function setReducedMotionPreference(reducedMotionPreference: string): void {
+    // whether "system" effectively means "animate" or "reduce" is determined in CSS, not in code
+    document.body.classList.remove(
+        "animate",
+        "reduce",
+        "system",
+    );
+    document.body.classList.add(reducedMotionPreferencepreference);
+}`;
+
+    public cssWiring = `/* use the global class to create the custom property */
+body.reduce { --app-preference: reduce; }
+body.animate { --app-preference: animate; }
+body.system { --app-preference: system; }
+
+body {
+    /* Define token values using conditional logic */
+    --anim-duration-long: if(
+        style(--app-preference: reduce) or
+            (style(--app-preference: system) and media(prefers-reduced-motion: reduce)): 1ms;
+        else: 5s;
+    );
+    /* Define token values using conditional logic */
+    --anim-iteration-count-infinite: if(
+        style(--app-preference: reduce) or
+            (style(--app-preference: system) and media(prefers-reduced-motion: reduce)): 1;
+        else: infinite;
+    );
+}`;
+
+    public cssFuture = `/* THE FOLLOWING IS NOT POSSIBLE, but could be once @custom-media is widely supported, if custom media supports style queries.
+ * If supported, this would make strategy 3 using CSS if() very concise. Fingers crossed 🤞 that this will be possible someday.
+ */
+@custom-media --custom-reduced style(--app-preference: reduce) or
+    (style(--app-preference: system) and (prefers-reduced-motion: reduce));
+
+body {
+    --anim-duration-long: if(--custom-reduced): 5s; else: 1s;);
+    --anim-iteration-count: if(--custom-reduced): 2; else: infinite;);
+}`;
+
+    public cssUsage = `.animated-component {
+    animation-name: slider;
+    /* Use tokens and get whatever values they currently have; components
+     * don't need to know about settings that determine behavior */
+    animation-duration: --anim-duration-long;
+    animation-iteration-count: --anim-iteration-count-infinite;
+}`;
 
     public pros: string[] = [
         "Declaration of rule conditions is very clear",

@@ -111,9 +111,3 @@ body {
     );
 }
 /* #endregion */
-
-pre {
-    border: 1px solid #222;
-    background-color: #ddd;
-    padding: .5rem;
-}

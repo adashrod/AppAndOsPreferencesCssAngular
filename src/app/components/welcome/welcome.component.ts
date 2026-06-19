@@ -6,7 +6,10 @@ import { Component } from "@angular/core";
     imports: [],
     template: `
         <h1>Handling user preferences in CSS 3 ways</h1>
-        <p>This is a proof-of-concept for 3 different ways to reconcile operating system preferences with application preferences.</p>
+        <p>
+            This is an interactive proof-of-concept for 3 different ways to
+            reconcile operating system preferences with application preferences.
+        </p>
         <p>
             There are OS preferences that can queried in CSS and JS to show different user experiences; these include
             <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion" target="_blank">reduced motion</a>,
