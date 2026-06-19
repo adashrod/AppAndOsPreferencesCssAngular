@@ -1,6 +1,6 @@
 /* global window, sessionStorage */
-import { DOCUMENT } from "@angular/common";
-import { Component, Inject, OnInit } from "@angular/core";
+import { DOCUMENT,isPlatformBrowser } from "@angular/common";
+import { Component, Inject, OnInit,PLATFORM_ID } from "@angular/core";
 import { Router, RouterLink, RouterOutlet } from "@angular/router";
 
 import { WelcomeComponent } from "app/components/welcome/welcome.component";
@@ -18,9 +18,11 @@ import { WelcomeComponent } from "app/components/welcome/welcome.component";
 })
 export class AppComponent implements OnInit {
     public uiPrefReducedMotion!: string;
+    private mediaQuery: MediaQueryList | null = null;
 
     public constructor(
         @Inject(DOCUMENT) private document: Document,
+        @Inject(PLATFORM_ID) private platformId: object,
         private router: Router
     ) {}
 
@@ -33,11 +35,13 @@ export class AppComponent implements OnInit {
         }
 
         this.setReducedMotionPreference("system");
-        const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-        mediaQuery.addEventListener("change", (event: MediaQueryListEvent) => {
-            this.updateStrategy1ClassNames(event.matches);
-            // no need to update anything for strategies 2 and 3 here because they check the media query in CSS
-        });
+        if (isPlatformBrowser(this.platformId)) {
+            this.mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+            this.mediaQuery.addEventListener("change", (event: MediaQueryListEvent) => {
+                this.updateStrategy1ClassNames(event.matches);
+                // no need to update anything for strategies 2 and 3 here because they check the media query in CSS
+            });
+        }
     }
 
     public setReducedMotionPreference(reducedMotionPreference: string): void {
@@ -124,8 +128,8 @@ export class AppComponent implements OnInit {
      * false if they have set it to no preference, or null if doing SSR
      */
     private getOsReducedMotion(): boolean | null {
-        if (typeof window !== "undefined") {
-            return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (isPlatformBrowser(this.platformId) && this.mediaQuery !== null) {
+            return this.mediaQuery.matches;
         }
         return null;
     }

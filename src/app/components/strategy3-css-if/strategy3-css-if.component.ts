@@ -6,6 +6,7 @@ import { AnimationContainerComponent } from "app/components/animation-container/
 import { BrowserSupportNoticeComponent, Feature } from "app/components/browser-support-notice/browser-support-notice.component";
 import { ColorLegendComponent } from "app/components/color-legend/color-legend.component";
 import { ProsAndConsComponent } from "app/components/pros-and-cons/pros-and-cons.component";
+import { CSS_USAGE, TS_ADD_PREFERENCE_CLASS_TO_BODY } from "app/util/copy";
 import { supportsCssIf } from "app/util/css";
 
 @Component({
@@ -25,16 +26,7 @@ export class Strategy3CssIfComponent {
     public readonly Feature = Feature;
     public readonly supportsCssIf = supportsCssIf;
 
-    public jsWiring = `// fired when user selects preference in application UI
-function setReducedMotionPreference(reducedMotionPreference: string): void {
-    // whether "system" effectively means "animate" or "reduce" is determined in CSS, not in code
-    document.body.classList.remove(
-        "animate",
-        "reduce",
-        "system",
-    );
-    document.body.classList.add(reducedMotionPreference);
-}`;
+    public jsWiring = TS_ADD_PREFERENCE_CLASS_TO_BODY;
 
     public cssWiring = `/* use the global class to create the custom property */
 body.reduce { --app-preference: reduce; }
@@ -67,13 +59,7 @@ body {
     --anim-iteration-count: if(--custom-reduced): 2; else: infinite;);
 }`;
 
-    public cssUsage = `.animated-component {
-    animation-name: slider;
-    /* Use tokens and get whatever values they currently have; components
-     * don't need to know about settings that determine behavior */
-    animation-duration: --anim-duration-long;
-    animation-iteration-count: --anim-iteration-count-infinite;
-}`;
+    public cssUsage = CSS_USAGE;
 
     public pros: string[] = [
         "Declaration of rule conditions is very clear",

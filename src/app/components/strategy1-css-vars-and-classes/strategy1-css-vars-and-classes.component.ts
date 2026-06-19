@@ -5,6 +5,7 @@ import { HighlightAuto } from "ngx-highlightjs";
 import { AnimationContainerComponent } from "app/components/animation-container/animation-container.component";
 import { ColorLegendComponent } from "app/components/color-legend/color-legend.component";
 import { ProsAndConsComponent } from "app/components/pros-and-cons/pros-and-cons.component";
+import { CSS_USAGE } from "app/util/copy";
 
 @Component({
     selector: "app-strategy1-css-vars-and-classes",
@@ -80,13 +81,7 @@ body.reduce {
     --anim-iteration-count-infinite: 1;
 }`;
 
-    public cssUsage = `.animated-component {
-    animation-name: slider;
-    /* Use tokens and get whatever values they currently have; components
-     * don't need to know about settings that determine behavior */
-    animation-duration: --anim-duration-long;
-    animation-iteration-count: --anim-iteration-count-infinite;
-}`;
+    public cssUsage = CSS_USAGE;
 
     public pros: string[] = [
         "Simple to implement",
