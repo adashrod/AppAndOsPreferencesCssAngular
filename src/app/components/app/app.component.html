@@ -1,26 +1,29 @@
-<app-welcome />
-<ul>
-    <li>
-        <a routerLink="/strategy-1">Strategy 1 (CSS classes and vars only)</a>
-    </li>
-    <li>
-        <a routerLink="/strategy-2">Strategy 2 (&#64;container style(...) only)</a>
-    </li>
-    <li>
-        <a routerLink="/strategy-3">Strategy 3 (CSS if(...) and &#64;container style(...))</a>
-    </li>
-</ul>
-<div>The application preference is set to <code>{{uiPrefReducedMotion}}</code></div>
-<div class="app-preference-container">
-    <button [class.selected]="uiPrefReducedMotion === 'animate'" (click)="setReducedMotionPreference('animate')">Animation</button>
-    <button [class.selected]="uiPrefReducedMotion === 'reduce'" (click)="setReducedMotionPreference('reduce')">Reduced Motion</button>
-    <button [class.selected]="uiPrefReducedMotion === 'system'" (click)="setReducedMotionPreference('system')">System</button>
-
+<div class="app-container">
+    <app-welcome />
+    <ul>
+        <li>
+            <a routerLink="/strategy-1">Strategy 1 (CSS classes and vars only)</a>
+        </li>
+        <li>
+            <a routerLink="/strategy-2">Strategy 2 (&#64;container style(...) only)</a>
+        </li>
+        <li>
+            <a routerLink="/strategy-3">Strategy 3 (CSS if(...) and &#64;container style(...))</a>
+        </li>
+    </ul>
+    <h3>2: This is the application preference selector.</h3>    
+    <div>The application preference is set to <code>{{uiPrefReducedMotion}}</code></div>
+    <div class="app-preference-container">
+        <button [class.selected]="uiPrefReducedMotion === 'animate'" (click)="setReducedMotionPreference('animate')">Animation</button>
+        <button [class.selected]="uiPrefReducedMotion === 'reduce'" (click)="setReducedMotionPreference('reduce')">Reduced Motion</button>
+        <button [class.selected]="uiPrefReducedMotion === 'system'" (click)="setReducedMotionPreference('system')">System</button>
+        
+    </div>
+    <p>
+        If the setting is <code>system</code>, we'll use a media query to determine the user's preferred reduced motion setting.
+        The other two options override the system setting.
+    </p>
+    <main>
+        <router-outlet />
+    </main>
 </div>
-<p>
-    If the setting is <code>system</code>, we'll use a media query to determine the user's preferred reduced motion setting.
-    The other two options override the system setting.
-</p>
-<main>
-    <router-outlet />
-</main>

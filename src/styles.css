@@ -2,13 +2,20 @@ body {
     font-family: Arial, sans-serif;
 }
 
-body.strategy1-ui-reduce, body.strategy2-ui-reduce { --app-preference: reduce; }
-body.strategy1-ui-animate, body.strategy2-ui-animate { --app-preference: animate; }
-body.strategy1-ui-system, body.strategy2-ui-system { --app-preference: system; }
+/*
+Strategies 2 and 3 add a class to the body that indicates the current preference in the *application*.
+This does not factor in the result of the media query. This is used to set a CSS variable that is used
+in container style queries below.
+ */
+body.strategy2-ui-reduce, body.strategy3-ui-reduce { --app-preference: reduce; }
+body.strategy2-ui-animate, body.strategy3-ui-animate { --app-preference: animate; }
+body.strategy2-ui-system, body.strategy3-ui-system { --app-preference: system; }
 
 /* #region Strategy 1 */
-/* Since strategy 1 doesn't do any querying in CSS, it doesn't need to know the fine-grained details of
-how animate/reduce was calculated. These debug classes are only used for the color of the animated box. */
+/*
+Since strategy 1 doesn't do any querying in CSS, it doesn't need to know the fine-grained details of
+how animate/reduce was calculated. These debug classes are only used for the color of the animated box.
+*/
 body.strategy1-debug-ui-animate {
     --strategy1-anim-color-indicator: red;
 }
@@ -25,6 +32,10 @@ body.strategy1-debug-os-reduce {
     --strategy1-anim-color-indicator: green;
 }
 
+/*
+Strategy 1 does the logic in JS of what the final state of the preference should be based on both the
+preference in the application and the result of the media query, then adds 1 class to the body.
+ */
 body.strategy1-animate {
     --strategy1-anim-dur-long: 5s;
     --strategy1-anim-iteration-count-infinite: infinite;
@@ -40,7 +51,7 @@ body.strategy1-reduce {
 main {
     /* Since Strategy 2 has defaults, browsers that don't support container
     style queries w/ custom properties will get these values no matter what,
-    though the box is hidden in browsers that don't support strategy 2 to 
+    though the box is hidden in browsers that don't support strategy 2 to
     avoid confusion.
     These variables are scoped to <main>, not <body>, because their values are
     dependent on container style queries of variables scoped to <body>, and
@@ -100,3 +111,9 @@ body {
     );
 }
 /* #endregion */
+
+pre {
+    border: 1px solid #222;
+    background-color: #ddd;
+    padding: .5rem;
+}

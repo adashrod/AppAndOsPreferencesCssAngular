@@ -1,1 +1,0 @@
-- add more to the pros/cons lists after implementing component-specific overrides

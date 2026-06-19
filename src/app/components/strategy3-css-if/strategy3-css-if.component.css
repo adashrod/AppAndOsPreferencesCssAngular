@@ -22,6 +22,18 @@
     }
 }
 
+@keyframes flash {
+    0% {
+        opacity: 100%;
+    }
+    50% {
+        opacity: 0%;
+    }
+    100% {
+        opacity: 100%;
+    }
+}
+
 .sliding-box {
     width: 100px;
     height: 100px;
@@ -30,4 +42,18 @@
     animation-duration: var(--strategy3-anim-dur-long);
     animation-timing-function: ease-in-out;
     animation-iteration-count: var(--strategy3-anim-iteration-count-infinite);
+}
+
+.component-specific-example {
+    animation-name: flash;
+    animation-duration: if(
+        style(--app-preference: reduce) or
+            (style(--app-preference: system) and media(prefers-reduced-motion: reduce)): 5s;
+        else: 1s;
+    );
+    animation-iteration-count: if(
+        style(--app-preference: reduce) or
+            (style(--app-preference: system) and media(prefers-reduced-motion: reduce)): 5;
+        else: infinite;
+    );
 }

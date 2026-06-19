@@ -11,7 +11,7 @@ import { Component } from "@angular/core";
             <li><span style="color: yellow; background-color: gray;">Yellow:</span> Reduced Motion (UI override)</li>
             <li><span style="color: blue;">Blue:</span> Animation (System)</li>
             <li><span style="color: green;">Green:</span> Reduced Motion (System)</li>
-            <li>Invisible: browser doesn't support tools used to determine the setting</li>
+            <li>Blank: browser doesn't support tools used to determine the setting</li>
         </ul>
     `,
     styles: ""

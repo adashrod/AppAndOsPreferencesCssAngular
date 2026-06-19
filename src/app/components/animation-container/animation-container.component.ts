@@ -1,4 +1,6 @@
-import { Component } from "@angular/core";
+import { Component, Input } from "@angular/core";
+
+export type LabelType = "box" | "text";
 
 @Component({
     selector: "app-animation-container",
@@ -6,7 +8,16 @@ import { Component } from "@angular/core";
     imports: [],
     template: `
         <div class='animation-container'>
-            <div>An animated box or blank if the browser doesn't support the feature(s):</div>
+            <div>
+                @switch (label) {
+                    @case ("box") {
+                        <span>An animated box</span> {{suffixText}}
+                    }
+                    @case ("text") {
+                        <span>Some animated text</span> {{suffixText}}
+                    }
+                }
+            </div>
             <ng-content />
         </div>`,
     styles: `
@@ -19,5 +30,7 @@ import { Component } from "@angular/core";
         }
     `
 })
-// eslint-disable-next-line @typescript-eslint/no-extraneous-class
-export class AnimationContainerComponent {}
+export class AnimationContainerComponent {
+    @Input({ required: false }) public label: LabelType | null = null;
+    public readonly suffixText = "or blank if the browser doesn't support the feature(s):";
+}

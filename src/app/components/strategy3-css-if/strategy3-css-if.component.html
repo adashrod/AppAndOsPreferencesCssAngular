@@ -1,34 +1,75 @@
-<h2>Strategy 3 (CSS if() w/ container style queries w/ custom properties)</h2>
+<h2>Strategy 3 (CSS if() w/ container style queries)</h2>
+<app-browser-support-notice [feature]="Feature.CONTAINER_STYLE_CUSTOM_PROPERTIES" />
+<app-browser-support-notice [feature]="Feature.CSS_IF" />
 <p>
     This strategy uses a container style query with a custom property and a media query to determine the user's preferred reduced motion setting.
     It then uses a CSS if() statement to set animation properties based on the preference.
 </p>
-<p>As of the time of the latest commit, it works in Chrome.</p>
+<p>Try changing the app preference in #2 above, and the reduced motion setting in your operating system (accessibility preferences) to see changes.</p>
+<p>As of the time of the latest commit, this is supported in Chrome.</p>
 <div class="demo-container">
     <app-animation-container>
         <app-color-legend />
     </app-animation-container>
-    <app-animation-container>
+    <app-animation-container label="box">
         <div class="sliding-box"></div>
     </app-animation-container>
 </div>
-<app-browser-support-notice [feature]="Feature.CONTAINER_STYLE_CUSTOM_PROPERTIES" />
-<app-browser-support-notice [feature]="Feature.CSS_IF" />
-<p>Example:</p>
+<p>JavaScript Wiring:</p>
 <pre>
+// fired when user selects preference in application UI
+function setReducedMotionPreference(reducedMotionPreference: string): void &#123;
+    // whether "system" effectively means "animate" or "reduce" is determined in CSS, not in code
+    document.body.classList.remove(
+        "animate",
+        "reduce",
+        "system",
+    );
+    document.body.classList.add(reducedMotionPreferencepreference);
+&#125;
+</pre>
+<p>CSS Wiring:</p>
+<pre>
+/* use the global class to create the custom property */
+body.reduce &#123; --app-preference: reduce; &#125;
+body.animate &#123; --app-preference: animate; &#125;
+body.system &#123; --app-preference: system; &#125;
+
 body &#123;
+    /* Define token values using conditional logic */
     --anim-duration-long: if(
         style(--app-preference: reduce) or
             (style(--app-preference: system) and media(prefers-reduced-motion: reduce)): 1ms;
         else: 5s;
     );
+    /* Define token values using conditional logic */
     --anim-iteration-count-infinite: if(
         style(--app-preference: reduce) or
             (style(--app-preference: system) and media(prefers-reduced-motion: reduce)): 1;
         else: infinite;
     );
 &#125;
-<!-- todo: add a component example, too -->
 </pre>
-<!-- todo: make an element with a component-specific animation override -->
+<pre>
+/* THE FOLLOWING IS NOT POSSIBLE, but could be once &#64;custom-media is widely supported, if custom media supports style queries.
+ * If supported, this would make strategy 3 using CSS if() very concise. Fingers crossed 🤞 that this will be possible someday.
+ */
+&#64;custom-media --custom-reduced style(--app-preference: reduce) or
+    (style(--app-preference: system) and (prefers-reduced-motion: reduce));
+
+body &#123;
+    --anim-duration-long: if(--custom-reduced): 5s; else: 1s;);
+    --anim-iteration-count: if(--custom-reduced): 2; else: infinite;);
+&#125;
+</pre>
+<p>Example CSS:</p>
+<pre>
+.animated-component &#123;
+    animation-name: slider;
+    /* Use tokens and get whatever values they currently have; components 
+     * don't need to know about settings that determine behavior */
+    animation-duration: --anim-duration-long;
+    animation-iteration-count: --anim-iteration-count-infinite;
+&#125;
+</pre>
 <app-pros-and-cons [pros]="pros" [cons]="cons" />

@@ -1,3 +1,10 @@
+.app-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 60rem;
+    margin: 0 auto;
+}
+
 .app-preference-container {
     display: flex;
     flex-direction: row;

@@ -39,26 +39,26 @@ export function supportsContainerStyleQueriesWithCustomProperties(): boolean {
 
     const container = document.createElement("div");
     const child = document.createElement("div");
-  
+
     container.style.containerType = "inline-size";
     container.style.setProperty("--my-prop", "1");
-  
+
     child.textContent = "test";
-  
+
     const style = document.createElement("style");
     style.textContent = `
         @container style(--my-prop: 1) {
             div { color: rgb(1, 2, 3); }
         }
     `;
-  
+
     document.body.append(container, style);
     container.appendChild(child);
-  
+
     const applied = window.getComputedStyle(child).color === "rgb(1, 2, 3)";
-  
+
     style.remove();
     container.remove();
-  
+
     return applied;
 }

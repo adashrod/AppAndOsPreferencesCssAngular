@@ -3,7 +3,7 @@
         <h3>Pros</h3>
         <ul>
             @for (pro of pros; track pro) {
-                <li>{{ pro }}</li>
+                <li [innerHTML]="pro"></li>
             }
         </ul>
     </section>
@@ -11,7 +11,7 @@
         <h3>Cons</h3>
         <ul>
             @for (con of cons; track con) {
-                <li>{{ con }}</li>
+                <li [innerHTML]="con"></li>
             }
         </ul>
     </section>

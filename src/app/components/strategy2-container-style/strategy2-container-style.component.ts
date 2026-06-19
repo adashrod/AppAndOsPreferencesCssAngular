@@ -21,12 +21,12 @@ import { supportsContainerStyleQueriesWithCustomProperties } from "app/util/css"
 export class Strategy2ContainerStyleComponent {
     public readonly Feature = Feature;
     public readonly supportsContainerStyleQueriesWithCustomProperties = supportsContainerStyleQueriesWithCustomProperties;
+
     public pros: string[] = [
-        
+        "Calculation of effective value is in CSS, close to the implementation"
     ];
     public cons: string[] = [
-        "Not supported in all browsers yet",
-        "Feature is still experimental and could change in the future",
+        "Might not be supported in all browsers yet",
         "Rules are duplicated because of media query nested in a container style query",
     ];
 }

@@ -22,6 +22,18 @@
     }
 }
 
+@keyframes flash {
+    0% {
+        opacity: 100%;
+    }
+    50% {
+        opacity: 0%;
+    }
+    100% {
+        opacity: 100%;
+    }
+}
+
 .sliding-box {
     width: 100px;
     height: 100px;
@@ -30,4 +42,26 @@
     animation-duration: var(--strategy2-anim-dur-long);
     animation-timing-function: ease-in-out;
     animation-iteration-count: var(--strategy2-anim-iteration-count-infinite);
+}
+
+.component-specific-example {
+    animation-name: flash;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+}
+
+@container style(--app-preference: reduce) {
+    .component-specific-example {
+        animation-duration: 5s;
+        animation-iteration-count: 2;
+    }
+}
+
+@container style(--app-preference: system) {
+    @media(prefers-reduced-motion: reduce) {
+        .component-specific-example {
+            animation-duration: 5s;
+            animation-iteration-count: 5;
+        }
+    }
 }
