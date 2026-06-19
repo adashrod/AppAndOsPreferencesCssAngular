@@ -1,4 +1,4 @@
-/* global window */
+/* global window, sessionStorage */
 import { DOCUMENT } from "@angular/common";
 import { Component, Inject, OnInit } from "@angular/core";
 import { Router, RouterLink, RouterOutlet } from "@angular/router";
@@ -26,10 +26,10 @@ export class AppComponent implements OnInit {
 
     public ngOnInit(): void {
         // Handle redirect from 404.html on GitHub Pages
-        const redirect = sessionStorage.getItem('redirect');
-        if (redirect) {
-            sessionStorage.removeItem('redirect');
-            this.router.navigateByUrl(redirect);
+        const redirect = sessionStorage.getItem("redirect");
+        if (redirect !== null) {
+            sessionStorage.removeItem("redirect");
+            void this.router.navigateByUrl(redirect);
         }
 
         this.setReducedMotionPreference("system");
