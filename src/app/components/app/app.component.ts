@@ -1,6 +1,6 @@
 /* global window, sessionStorage */
-import { DOCUMENT,isPlatformBrowser } from "@angular/common";
-import { Component, Inject, OnInit,PLATFORM_ID } from "@angular/core";
+import { DOCUMENT, isPlatformBrowser } from "@angular/common";
+import { Component, Inject, OnInit, PLATFORM_ID } from "@angular/core";
 import { Router, RouterLink, RouterOutlet } from "@angular/router";
 
 import { WelcomeComponent } from "app/components/welcome/welcome.component";

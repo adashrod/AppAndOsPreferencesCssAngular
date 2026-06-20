@@ -6,7 +6,8 @@ import { provideHighlightOptions } from "ngx-highlightjs";
 import { routes } from "app/app.routes";
 
 export const appConfig: ApplicationConfig = {
-    providers: [provideRouter(routes),
+    providers: [
+        provideRouter(routes),
         provideHighlightOptions({
             coreLibraryLoader: () => import("highlight.js/lib/core"),
             lineNumbersLoader: () => import("ngx-highlightjs/line-numbers"), // Optional, add line numbers if needed
