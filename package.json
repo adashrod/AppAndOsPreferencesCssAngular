@@ -1,12 +1,12 @@
 {
-    "name": "css-user-pref-prototype",
-    "version": "0.0.0",
+    "name": "app-and-os-preferences-css",
+    "version": "1.0.0",
     "scripts": {
         "ng": "ng",
         "start": "ng serve --host 0.0.0.0",
-        "build": "ng build",
+        "build": "rm -rf dist; ng build --deploy-url https://adashrod.github.io/AppAndOsPreferencesCss/ --base-href /AppAndOsPreferencesCss/",
         "lint": "npx eslint src",
-        "watch": "ng build --watch --configuration development"
+        "watch": "rm -rf dist; ng build --watch --configuration development"
     },
     "private": true,
     "dependencies": {
