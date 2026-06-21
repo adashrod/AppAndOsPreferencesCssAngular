@@ -8,7 +8,7 @@ import { Component } from "@angular/core";
         <p>The color of the animated box indicates the current setting:</p>
         <ul>
             <li><span style="color: red;">Red:</span> Animation (UI override)</li>
-            <li><span style="color: yellow; background-color: gray;">Yellow:</span> Reduced Motion (UI override)</li>
+            <li><span style="color: orange;">Orange:</span> Reduced Motion (UI override)</li>
             <li><span style="color: blue;">Blue:</span> Animation (System)</li>
             <li><span style="color: green;">Green:</span> Reduced Motion (System)</li>
             <li>Blank: browser doesn't support tools used to determine the setting</li>
