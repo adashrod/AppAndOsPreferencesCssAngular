@@ -52,8 +52,6 @@ export class BrowserSupportNoticeComponent {
                     featureName: "CSS @container style() queries with custom properties",
                     test: supportsContainerStyleQueriesWithCustomProperties,
                 };
-            default:
-                throw new Error(`Unknown feature: ${this.feature}`);
         }
     }
 

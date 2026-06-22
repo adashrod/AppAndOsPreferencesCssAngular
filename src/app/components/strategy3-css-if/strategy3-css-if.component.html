@@ -12,6 +12,7 @@
         <app-color-legend />
     </app-animation-container>
     <app-animation-container label="box">
+        <!-- no need to surround this in a supports() check; in browsers that don't support if(), there'll be no valid value for the CSS properties -->
         <div class="sliding-box"></div>
     </app-animation-container>
 </div>

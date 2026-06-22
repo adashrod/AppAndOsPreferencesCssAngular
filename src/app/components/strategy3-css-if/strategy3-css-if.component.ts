@@ -7,7 +7,6 @@ import { BrowserSupportNoticeComponent, Feature } from "app/components/browser-s
 import { ColorLegendComponent } from "app/components/color-legend/color-legend.component";
 import { ProsAndConsComponent } from "app/components/pros-and-cons/pros-and-cons.component";
 import { CSS_USAGE, TS_ADD_PREFERENCE_CLASS_TO_BODY } from "app/util/copy";
-import { supportsCssIf } from "app/util/css";
 
 @Component({
     selector: "app-strategy3-css-if",
@@ -24,7 +23,6 @@ import { supportsCssIf } from "app/util/css";
 })
 export class Strategy3CssIfComponent {
     public readonly Feature = Feature;
-    public readonly supportsCssIf = supportsCssIf;
 
     public jsWiring = TS_ADD_PREFERENCE_CLASS_TO_BODY;
 
