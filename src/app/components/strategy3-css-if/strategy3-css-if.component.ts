@@ -26,7 +26,8 @@ export class Strategy3CssIfComponent {
 
     public jsWiring = TS_ADD_PREFERENCE_CLASS_TO_BODY;
 
-    public cssWiring = `/* use the global class to create the custom property */
+    public cssWiring = `
+/* use the global class to create the custom property */
 body.reduce { --app-preference: reduce; }
 body.animate { --app-preference: animate; }
 body.system { --app-preference: system; }
@@ -46,7 +47,8 @@ body {
     );
 }`;
 
-    public cssFuture = `/* THE FOLLOWING IS NOT POSSIBLE, but could be once @custom-media is widely supported, if custom media supports style queries.
+    public cssFuture = `
+/* THE FOLLOWING IS NOT POSSIBLE, but could be once @custom-media is widely supported, if custom media supports style queries.
  * If supported, this would make strategy 3 using CSS if() very concise. Fingers crossed 🤞 that this will be possible someday.
  */
 @custom-media --custom-reduced style(--app-preference: reduce) or

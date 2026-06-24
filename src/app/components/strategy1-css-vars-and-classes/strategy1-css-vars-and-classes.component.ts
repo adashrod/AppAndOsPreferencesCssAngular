@@ -20,7 +20,8 @@ import { CSS_USAGE } from "app/util/copy";
     styleUrl: "./strategy1-css-vars-and-classes.component.css"
 })
 export class Strategy1CssVarsAndClassesComponent {
-    public jsWiring = `let uiPrefReducedMotion;
+    public jsWiring = `
+let uiPrefReducedMotion;
 
 // fired when user selects preference in application UI
 // reducedMotionPreference: "animate" | "reduce" | "system"
@@ -68,7 +69,8 @@ function isMotionReducedByOs(): boolean | null {
     return null;
 }`;
 
-    public cssWiring = `/* "animate" and "reduce" classes are added to <body> by JS.
+    public cssWiring = `
+/* "animate" and "reduce" classes are added to <body> by JS.
  * There is no "system" class because that setting is only used in code to determine whether to use "animate" or "reduce".
  */
 
