@@ -23,9 +23,10 @@ export class Strategy1CssVarsAndClassesComponent {
     public jsWiring = `let uiPrefReducedMotion;
 
 // fired when user selects preference in application UI
+// reducedMotionPreference: "animate" | "reduce" | "system"
 function setReducedMotionPreference(reducedMotionPreference: string): void {
     uiPrefReducedMotion = reducedMotionPreference;
-    const mediaQueryMatches = getOsReducedMotion();
+    const mediaQueryMatches = isMotionReducedByOs();
     updateClassName(mediaQueryMatches);
 }
 
@@ -55,13 +56,15 @@ function calculateClassName(mediaQueryMatches: boolean | null): string[] {
             return mediaQueryMatches ? "reduce" : "animate";
         }
     }
+
     return "animate";
 }
 
-function getOsReducedMotion(): boolean | null {
+function isMotionReducedByOs(): boolean | null {
     if (typeof window !== "undefined") {
         return mediaQuery.matches;
     }
+
     return null;
 }`;
 
@@ -70,7 +73,7 @@ function getOsReducedMotion(): boolean | null {
  */
 
 body.animate {
-    /* Define token values */
+    /* Define token values to be used in components */
     --anim-duration-long: 5s;
     --anim-iteration-count-infinite: infinite;
 }

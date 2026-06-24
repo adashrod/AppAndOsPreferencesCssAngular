@@ -47,7 +47,7 @@ export class AppComponent implements OnInit {
 
     public setReducedMotionPreference(reducedMotionPreference: string): void {
         this.uiPrefReducedMotion = reducedMotionPreference;
-        const mediaQueryMatches = this.getOsReducedMotion();
+        const mediaQueryMatches = this.isMotionReducedByOs();
         this.updateStrategy1ClassNames(mediaQueryMatches);
         // Strategies 2 and 3 check the media query in CSS
         this.updateStrategy2ClassNames();
@@ -94,7 +94,7 @@ export class AppComponent implements OnInit {
                 result.push("strategy1-debug-ui-reduce");
                 break;
             case "system": {
-                const prefersReducedMotion = this.getOsReducedMotion();
+                const prefersReducedMotion = this.isMotionReducedByOs();
                 if (prefersReducedMotion !== null) {
                     result.push(prefersReducedMotion ? "strategy1-debug-os-reduce" : "strategy1-debug-os-animate");
                 }
@@ -128,7 +128,7 @@ export class AppComponent implements OnInit {
      * @returns true if the user has set their preferred reduced motion to reduce,
      * false if they have set it to no preference, or null if doing SSR
      */
-    private getOsReducedMotion(): boolean | null {
+    private isMotionReducedByOs(): boolean | null {
         if (isPlatformBrowser(this.platformId) && this.mediaQuery !== null) {
             return this.mediaQuery.matches;
         }

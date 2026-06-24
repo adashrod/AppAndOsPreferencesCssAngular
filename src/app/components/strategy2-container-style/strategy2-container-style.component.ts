@@ -28,11 +28,17 @@ export class Strategy2ContainerStyleComponent {
 
     public jsWiring = TS_ADD_PREFERENCE_CLASS_TO_BODY;
 
-    public cssWiring = `/* use the global class to create the custom property */
+    public cssWiring = `
+/* use the global class to create the custom property */
 body.reduce { --app-preference: reduce; }
 body.animate { --app-preference: animate; }
 body.system { --app-preference: system; }
 
+/* For this strategy, the tokens are defined on a element descendant to the body, where the custom
+ * property is defined. This is because when we override the tokens below, the container style
+ * query matches the body, and the selector inside that (main) matches this. We can't use body
+ * as a selector inside the container query since the container query already matched body.
+ */
 main {
     /* Define base token values */
     --anim-duration-long: 5s;
