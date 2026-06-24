@@ -34,10 +34,10 @@ body.reduce { --app-preference: reduce; }
 body.animate { --app-preference: animate; }
 body.system { --app-preference: system; }
 
-/* For this strategy, the tokens are defined on a element descendant to the body, where the custom
- * property is defined. This is because when we override the tokens below, the container style
- * query matches the body, and the selector inside that (main) matches this. We can't use body
- * as a selector inside the container query since the container query already matched body.
+/* For this strategy, the tokens are defined on an element descendant to the body (where the custom
+ * property is defined). This is because when we override the tokens below, the container style
+ * query matches the body, and the selector inside that (main) has to match something below it. We
+ * can't use body as a selector inside the container query since the container query already matched body.
  */
 main {
     /* Define base token values */
