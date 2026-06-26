@@ -91,7 +91,7 @@ main {
             /* rules are duplicated here because of the nested media query */
             --strategy2-anim-dur-long: 1ms;
             --strategy2-anim-iteration-count-infinite: 1;
-            --strategy2-content: "UI reduce";
+            --strategy2-content: "OS reduce";
         }
     }
 }

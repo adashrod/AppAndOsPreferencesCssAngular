@@ -24,7 +24,7 @@
 
 .sliding-box::before {
     display: block;
-    content: var(--strategy1-content);
+    content: var(--strategy2-content);
     align-content: center;
     text-align: center;
     width: 100px;
