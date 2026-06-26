@@ -18,6 +18,6 @@ export const CSS_USAGE = `
     animation-name: slider;
     /* Use tokens and get whatever values they currently have; components
      * don't need to know about settings that determine behavior */
-    animation-duration: --anim-duration-long;
-    animation-iteration-count: --anim-iteration-count-infinite;
+    animation-duration: var(--anim-duration-long);
+    animation-iteration-count: var(--anim-iteration-count-infinite);
 }`;
